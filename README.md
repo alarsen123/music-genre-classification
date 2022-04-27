@@ -9,7 +9,15 @@ This dataset contains a total of 1,000 30-second waveform audio files, divided i
 
 #### Attributes
 Genre: a discrete class label indicating the song's genre, which will act as our expected outputs  
-Predictive attributes/features will be extracted from the audio. Some of these will be similar to the csv attributes, but some csv attributes (such as length) are not relevant to this dataset.  
+Predictive attributes/features were extracted from the audio.  
+The features we have extracted from the audio are as follows:  
+- BPM  
+- Zero-Crossing Rate (rate of sign changes from positive to negative)  
+- Spectral Centroid (weighted mean of frequencies present in the song)  
+- Spectral Rolloff (measures of shape of the signal, models human voice characteristics)  
+- Mel-Frequency Cepstral Coefficients (measures shape of spectral envelope)  
+- Chroma Frequencies (measure of frequencies of different pitches, separated into 12 bins)  
+- Intensity: loudness in dB (relative to max possible loudness)  
 
 #### Size
 1000 instances (100 for each genre, each 30-seconds in length)
@@ -46,6 +54,9 @@ music_genre: a discrete class label indicating the song's genre, which will act 
 18 attributes (columns)  
 
 #### Data Cleaning
-We will likely be applying normalization to the popularity, duration, loudness, and tempo attributes.  
+For the GTZAN audio dataset, we applied normalization to all of the features we extracted. This was done by:  
+- taking the means of each feature value for each song (there was a value for each time a song was sample)  
+- applying normalization to the means (on a scale from 0 to 1)  
+We also applied normalization to the popularity, duration, loudness, and tempo attributes.  
 Many tracks have an unknown duration and tempo (indicated by "-1" and "?" respectively).  
-We will experiment with both dropping instances with null data and replacing fields with the mean value to see how the model results compare.  
+We experimented with both dropping instances with null data and replacing fields with the mean value to see how the model results compare once we build the model.  
